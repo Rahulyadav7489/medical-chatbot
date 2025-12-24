@@ -1,9 +1,24 @@
-langchain==0.3.26
-flask==3.1.1
-sentence-transformers==4.1.0
-pypdf===5.6.1
-python-dotenv==1.0.0
-langchain-pinecone==0.2.8
-langchain-openai==0.3.24
-langchain-community==0.3.26
-- e .
+# Core LangChain (new architecture)
+langchain-core==1.2.4
+langchain-community==0.2.14
+langchain-text-splitters==0.2.4
+
+# HuggingFace embeddings (new official package)
+langchain-huggingface==0.0.3
+sentence-transformers==2.7.0
+
+# Pinecone (NEW SDK)
+pinecone==3.0.3
+
+# PDF loading
+pypdf==4.2.0
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Utilities
+numpy==1.26.4
+tqdm==4.66.4
+
+flask==3.1.1 
+

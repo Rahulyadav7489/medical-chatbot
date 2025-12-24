@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        🩺 Medical Chatbot
+    </div>
+
+    <div class="chat-box" id="chat-box">
+        <div class="bot-message">
+            Hello 👋 I am a medical chatbot. Ask me a question.
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input 
+            type="text" 
+            id="user-input" 
+            placeholder="Ask a medical question..."
+            autocomplete="off"
+        >
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatBox = document.getElementById("chat-box");
+
+    // 1️⃣ Show USER message
+    const userDiv = document.createElement("div");
+    userDiv.className = "user-message";
+    userDiv.innerText = message;
+    chatBox.appendChild(userDiv);
+
+    input.value = "";
+
+    // 2️⃣ Create BOT placeholder
+    const botDiv = document.createElement("div");
+    botDiv.className = "bot-message";
+    botDiv.innerText = "Thinking...";
+    chatBox.appendChild(botDiv);
+
+    // 3️⃣ Send message to Flask
+    fetch("/get", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ msg: message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 4️⃣ Replace placeholder with bot reply
+        botDiv.innerText = data.response;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(() => {
+        botDiv.innerText = "Error getting response";
+    });
+}
+</script>
+
+
+</body>
+</html>

@@ -1,12 +1,14 @@
-
 #creating directories
-mkdir -p src
 mkdir -p research
+mkdir -p ingestion
+mkdir -p vector_store
+mkdir -p retrieval
+mkdir -p llm
+mkdir -p chatbot
+mkdir -p static
+mkdir -p templates
 
-#creating files
-touch src/__init__.py
-touch src/helper.py
-touch src/prompt.py
+
 touch .env
 touch setup.py
 touch app.py
